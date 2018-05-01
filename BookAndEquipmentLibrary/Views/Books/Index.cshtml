@@ -1,0 +1,134 @@
+﻿@model PagedList.IPagedList<BookAndEquipmentLibrary.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Book List";
+}
+
+<h2>Book List</h2>
+
+<p>
+    @Html.ActionLink("Create New Book", "Create")
+</p>
+
+<form asp-controller="Book" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString" + ViewBag.CurrentFilter as string>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            Asset Id
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Publisher
+        </th>
+        <th>
+            ISBN
+        </th>
+        <th>
+            DeweyIndex
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.LocationSortParm })
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeweyIndex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+            @{
+                if (item.StatusId == 1)
+                {
+                    <td>
+                        @Html.ActionLink("Check back in", "CheckIn", "Checkouts", new { assetId = item.AssetId }, null)
+                    </td>
+                }
+                else if (item.StatusId == 2)
+                {
+                    <td>
+                        @Html.ActionLink("Check out", "Create", "Checkouts", new { assetId = item.AssetId }, null)
+                    </td>
+                }
+                else if (item.StatusId == 3)
+                {
+                    <td>
+                        @Html.ActionLink("Mark as found", "CheckIn", "Checkouts", new { assetId = item.AssetId }, null)
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AssetId })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.AssetId })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.AssetId })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

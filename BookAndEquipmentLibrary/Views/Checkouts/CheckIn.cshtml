@@ -1,0 +1,74 @@
+﻿@model BookAndEquipmentLibrary.Models.Checkout
+
+@{
+    ViewBag.Title = "CheckIn";
+}
+
+<h2>CheckIn</h2>
+
+@{
+    if (!String.IsNullOrEmpty(ViewBag.errorMessage))
+    {
+        <h2 class="text-danger">@ViewBag.errorMessage</h2>
+    }
+}
+<h3>Are you sure you want to check in this asset?</h3>
+<div>
+    <h4>Check in</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Asset.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asset.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patron.Forename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patron.Forename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckoutDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckoutDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dd>
+            @Html.HiddenFor(model => model.RowVersion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="CheckIn" class="btn btn-default" /> |
+            @Html.ActionLink("List of checked out assets", "Index")
+        </div>
+    }
+</div>

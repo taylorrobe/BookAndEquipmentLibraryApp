@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BookAndEquipmentLibrary.Models.Checkout>
+
+@{
+    ViewBag.Title = "Checkouts Index";
+}
+<h2>Checkouts List</h2>
+
+
+<p>
+    @Html.ActionLink("Check out an Asset", "Create")
+</p>
+
+<form asp-controller="Checkouts" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Asset.AssetId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asset.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patron.PatronId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patron.Forename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patron.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patron.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckoutDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.AssetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.PatronId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.Forename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckoutDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.CheckoutId })
+        </td>
+        <td>
+            @Html.ActionLink("Check in", "CheckIn", new { checkoutId = item.CheckoutId })
+        </td>
+    </tr>
+    }
+
+</table>

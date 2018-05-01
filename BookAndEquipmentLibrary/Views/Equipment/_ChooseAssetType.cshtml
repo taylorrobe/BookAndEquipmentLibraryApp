@@ -1,0 +1,27 @@
+﻿@model BookAndEquipmentLibrary.Models.Equipment
+
+<div class="form-group">
+
+    @Html.LabelFor(model => model.AssetTypeId, "Asset Type", htmlAttributes: new { @class = "control-label col-md-2" })
+
+    <div class="col-md-10">
+
+        @Html.DropDownList("AssetTypeId", ViewBag.AssetTypeId as SelectList, String.Empty, htmlAttributes: new { @class = "form-control" })
+
+        <a class="btn btn-default"
+           id="assetTypeAddLink">Add New Asset Type</a>
+
+        @Html.ValidationMessageFor(model => model.AssetTypeId, "", new { @class = "text-danger" })
+
+        <div id="assetTypeDialog" class="hidden">
+
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="@Url.Content("~/Scripts/chooseAssetType.js")"></script>
+    }
+
+
+
+

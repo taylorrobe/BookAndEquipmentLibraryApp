@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BookAndEquipmentLibrary.Models.Patron>
+
+@{
+    ViewBag.Title = "Patron Index";
+}
+
+<h2>Patron Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Patron", "Create")
+</p>
+@{
+    if (!String.IsNullOrEmpty(ViewBag.errorMessage))
+    {
+        <h3 class="text-danger">@ViewBag.errorMessage</h3>
+    }
+}
+<form asp-controller="Patrons" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatronId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Forename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatronId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Checkout an asset", "Create", "Checkouts", new { PatronId = item.PatronId }, new { })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PatronId })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.PatronId })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.PatronId })
+            </td>
+        </tr>
+    }
+
+</table>

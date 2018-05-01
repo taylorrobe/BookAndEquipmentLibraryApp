@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Equipment and Book Library</h1>
+    <p class="lead">Intranet application for tracking equipment and books.</p>
+</div>
+@{
+    if (!String.IsNullOrEmpty(ViewBag.errorMessage))
+    {
+        <h3 class="text-danger">@ViewBag.errorMessage</h3>
+    }
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Library tools</h2>
+        <h3>Patrons</h3>
+        <p>Manage Patrons, including adding new patron, editing and deleting details.</p>
+        <p>@Html.ActionLink("Patron List", "Index", "Patrons")</p>
+        <p>@Html.ActionLink("New Patron", "Create", "Patrons")</p>
+
+        <h3>Equipment</h3>
+        <p>
+            Manage Equipment, including adding new inventory, checking in and out.
+        </p>
+        <p>@Html.ActionLink("Equipment List", "Index", "Equipment")</p>
+        <p>@Html.ActionLink("New Equipment", "Create", "Equipment")</p>
+        <h3>Books</h3>
+        <p>
+            Manage Books, including adding new inventory, checking in and out.
+        </p>
+        <p>@Html.ActionLink("Book List", "Index", "Books")</p>
+        <p>@Html.ActionLink("New Book", "Create", "Books")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Manage Assets</h2>
+        <p>
+            Manage Assets, including adding new inventory.
+        </p>
+        <p>@Html.ActionLink("Asset List", "Index", "Assets")</p>
+        <h3>Asset Types</h3>
+        <p>
+            Manage Asset types (for equipment only), including adding new types such as 'Detectors'.
+        </p>
+        <p>@Html.ActionLink("Asset Type List", "Index", "AssetTypes")</p>
+        <p>@Html.ActionLink("New Asset Type", "Create", "AssetTypes")</p>
+        <h3>Locations</h3>
+        <p>
+            Manage Locations, including adding new locations for equipment.
+        </p>
+        <p>@Html.ActionLink("Location List", "Index", "Locations")</p>
+        <p>@Html.ActionLink("New Location", "Create", "Locations")</p>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Checkout Managing</h2>
+        <h3>Current Checkouts</h3>
+        <p>Manage Checkouts, including search and check out/in.</p>
+        <p>@Html.ActionLink("Current Checkouts List", "Index", "Checkouts")</p>
+
+        <h3>Checkout history</h3>
+        <p>View Checkout History, including search.</p>
+        <p>@Html.ActionLink("Checkout History", "Index", "CheckoutHistories")</p>
+
+    </div>
+
+</div>

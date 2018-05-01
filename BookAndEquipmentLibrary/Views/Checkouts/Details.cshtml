@@ -1,0 +1,66 @@
+﻿@model BookAndEquipmentLibrary.Models.Checkout
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Checkout</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Asset.DisplayName)
+        </dt>
+
+        <dd>
+            <a href="@Url.Action("Details", "Assets", new { id = Model.AssetId })"><span>@Html.DisplayFor(model => model.Asset.DisplayName)</span></a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patron.DisplayName)
+        </dt>
+
+        <dd>
+            <a href="@Url.Action("Details", "Patrons", new { id = Model.PatronId })"><span>@Html.DisplayFor(model => model.Patron.DisplayName)</span></a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patron.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patron.EmailAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckoutDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckoutDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("List of checked out assets", "Index") |
+    @Html.ActionLink("Check in", "CheckIn", new { checkoutId = Model.CheckoutId })
+</p>

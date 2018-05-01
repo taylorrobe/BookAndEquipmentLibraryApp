@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BookAndEquipmentLibrary.Models.AssetType>
+
+@{
+    ViewBag.Title = "Asset Type Index";
+}
+
+<h2>Asset Type Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Asset Type", "Create")
+</p>
+<form asp-controller="AssetType" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RowVersion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.AssetTypeId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AssetTypeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AssetTypeId })
+        </td>
+    </tr>
+}
+
+</table>

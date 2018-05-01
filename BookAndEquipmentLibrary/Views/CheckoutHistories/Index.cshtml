@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BookAndEquipmentLibrary.Models.CheckoutHistory>
+
+@{
+    ViewBag.Title = "Checkout History Index";
+}
+
+<h2>Checkout History Index</h2>
+
+<form asp-controller="CheckoutHistory" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Asset.AssetId)
+        </th>
+        <th>
+            Asset
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patron.PatronId)
+        </th>
+        <th>
+            Patron
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckedOutDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckedInDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.AssetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.PatronId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patron.Forename) @Html.DisplayFor(modelItem => item.Patron.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedOutDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedInDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.CheckoutHistoryId })
+        </td>
+    </tr>
+}
+
+</table>

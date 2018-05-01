@@ -1,0 +1,93 @@
+﻿@model BookAndEquipmentLibrary.Models.CheckoutViewModels.CheckoutAssetOrForPatron
+
+@{
+    ViewBag.Title = "Check Out";
+}
+
+<h2>Check out an asset</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Checkout</h4>
+    <hr />
+    @{
+        if (!String.IsNullOrEmpty(ViewBag.errorMessage))
+        {
+            <h3 class="text-danger">@ViewBag.errorMessage</h3>
+        }
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AssetId, "Asset", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.AssetId, ViewBag.AssetId as SelectList, String.Empty,
+                                                      new
+                                                      {
+                                                          id = "AssetId",
+                                                          @class = "form-control chosen-select",
+                                                          data_placeholder = "Choose an Asset..."
+                                                      })
+            @Html.ValidationMessageFor(model => model.AssetId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PatronId, "Patron", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.PatronId, ViewBag.PatronId as SelectList, String.Empty,
+                                                      new
+                                                      {
+                                                          id = "PatronId",
+                                                          @class = "form-control chosen-select",
+                                                          data_placeholder = "Choose a Patron..."
+                                                      })
+            @Html.ValidationMessageFor(model => model.PatronId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckoutDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CheckoutDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DefaultReturnDate } })
+            @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.FixedAsset)
+    @Html.HiddenFor(model => model.FixedPatron)
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Check out" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("List of checked out assets", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>    $(".chosen-select").chosen();</script>  @*Hookup Chosen Plugin*@
+}
